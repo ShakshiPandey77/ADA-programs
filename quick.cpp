@@ -44,8 +44,17 @@ void printArray(int arr[], int size)
 int main()
 {
 	
-	int a[]={10,5,7,9,4,6};
-	int n=6;
+	//int a[]={10,5,7,9,4,6};
+	//int n=6;
+	int n;
+	cout<<"enter array size";
+	cin>>n;
+	int a[n];
+	cout<<"enter the array elements";
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
 	quick(a,0,n-1);
 	cout<<"sorted array: ";
 	printArray(a,n);
