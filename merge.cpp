@@ -47,7 +47,7 @@ cout<<"enter array size";
 cin>>n;
 int a[n];
 cout<<"enter the array elemnts:";
-for(int i=-;i<n;i++)
+for(int i=0;i<n;i++)
 {
 cin>>a[i];
 }
