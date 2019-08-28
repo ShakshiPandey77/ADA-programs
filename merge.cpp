@@ -40,8 +40,17 @@ void printArray(int arr[], int size)
     cout << endl;  
 } 
 int main(){
-int a[]={6,2,10,7,5,8};
-int n=6;
+//int a[]={6,2,10,7,5,8};
+//int n=6;
+int n;
+cout<<"enter array size";
+cin>>n;
+int a[n];
+cout<<"enter the array elemnts:";
+for(int i=-;i<n;i++)
+{
+cin>>a[i];
+}
 split(a,0,n-1);
 cout<<"sorted array: ";
 printArray(a,n);
