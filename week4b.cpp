@@ -3,7 +3,7 @@
 #define c 5
 using namespace std;
 void dfs(int ro,int col);
-bool isSafe(int ro,int col);
+int isSafe(int ro,int col);
 int M[r][c]={0};
 int visited[r][c]={0};
 int islands()
@@ -34,12 +34,9 @@ dfs(ro+rownum[k],col+colnum[k]);
 }
 }
 }
-bool isSafe(int ro,int col)
+int isSafe(int ro,int col)
 {
-	if((ro>=0)&&(ro<r)&&(col>=0)&&(c<col)&&M[ro][col]&&!visited[ro][col])
-		return true;
-	else
-		return false;
+	return ((ro>=0)&&(ro<r)&&(col>=0)&&(col<c)&&(M[ro][col]&& !visited[ro][col]));
 }
 
 int main()
@@ -53,7 +50,7 @@ for(int j=0;j<c;j++)
 cin>>M[i][j];
 }
 }
-cout<<islands();
+cout<<islands()<<"\n";
 return 0;
 }
 
