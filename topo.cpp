@@ -44,3 +44,16 @@ int main(){
  
     return 0;
 }
+
+/* output: Enter the no of vertices:
+3
+Enter the adjacency matrix:
+Enter row 1
+0 0 0 1
+Enter row 2
+1 0 0 0
+Enter row 3
+0 1 0 0
+
+The topological order is:3 1 2 
+*/
