@@ -1,7 +1,7 @@
 #include<iostream> 
 using namespace std; 
 
-void lcs( char *X, char *Y, int m, int n ) 
+void LCS( char *X, char *Y, int m, int n ) 
   {
    int L[m+1][n+1]; 
    for (int i=0; i<=m; i++) 
@@ -52,6 +52,6 @@ int main()
   
   int m = strlen(X); 
   int n = strlen(Y); 
-  lcs(X, Y, m, n); 
+  LCS(X, Y, m, n); 
   return 0; 
 } 
