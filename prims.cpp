@@ -73,3 +73,17 @@ int main()
 
 	return 0; 
 } 
+/* output:
+enter the no of nodes:5
+enter adjacency matrix:
+0 2 0 6 0 
+2 0 3 0 5
+0 3 0 0 7
+6 0 0 0 0
+0 5 7 0 0
+edges   weight
+0-1
+21-2
+30-3
+61-4
+*/
