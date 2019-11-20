@@ -1,77 +1,72 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <climits>
+
 using namespace std;
-int V;
-int minDistance(int dist[], bool sptSet[]) 
-{ 
+
+void djikstra(int **cost, int n, int src){
+	int dist[n], vis[n], min, u, count;
 	
-	int min = INT_MAX, min_index; 
-
-	for (int v = 0; v < V; v++) 
-		if (sptSet[v] == false && dist[v] <= min) 
-			min = dist[v], min_index = v; 
-
-	return min_index; 
-} 
-
-
-void printSolution(int dist[]) 
-{ 
-	printf("Vertex \t\t Distance from Source\n"); 
-	for (int i = 0; i < V; i++) 
-		printf("%d \t\t %d\n", i, dist[i]); 
-} 
-
-
-void dijkstra(int **graph, int src) 
-{ 
-	int dist[V]; 
-
-	bool sptSet[V];
-
+	for(int j = 1; j<n; j++) dist[j] = cost[src][j];
 	
-	for (int i = 0; i < V; i++) 
-		dist[i] = INT_MAX, sptSet[i] = false; 
-
-	 
-	dist[src] = 0; 
-
-	 
-	for (int count = 0; count < V - 1; count++) { 
-		
-		int u = minDistance(dist, sptSet); 
-
-		
-		sptSet[u] = true; 
-
-		 for (int v = 0; v < V; v++) 
-
-			
-			if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX 
-				&& dist[u] + graph[u][v] < dist[v]) 
-				dist[v] = dist[u] + graph[u][v]; 
-	} 
-
+	for(int j = 0; j<n; j++) vis[j] = 0;
 	
-	printSolution(dist); 
-} 
+	dist[src] = 0;
+	vis[src] = 1;
+	count = 1;
+	
+	while( count != n){
+		min = INT_MAX;
+		for(int j = 0; j<n; j++){
+			if(dist[j]<min && !vis[j]){
+				min = dist[j];
+				u = j;
+			}//end of if
+		}//end of loop
+		vis[u] = 1;
+		count++;
+		for(int j = 0; j<n; j++)
+			if(min + cost[u][j] < dist[j] && !vis[j])
+				dist[j] = min+cost[u][j];
+	}//end of loop
+	
+	cout<<"Shortest Distance :\n";
+	for(int j=0; j<n ; j++)
+		if(j!=src)
+			cout<<src<<" - "<<j<<" -> "<<dist[j]<<endl;
+}//end of method
 
+int main(){
+	int **cost, n, src;
+	cout<<"Enter the number of nodes :";
+	cin>>n;
+	cost = new int*[n];
+	for(int i =0; i<n; i++) cost[i] = new int[n];
+	cout<<"Enter the cost matrix :\n";
+	for(int i =0; i<n;i++)
+		for(int j =0; j<n; j++)
+			cin>>cost[i][j];
+	cout<<"Enter souce vertex :";
+	cin>>src;
+	djikstra(cost, n, src);
+	return 0;
+}//end of main
 
-int main() 
-{ 
-	cout<<"Enter the no. of nodes :";
-	cin>>V;
-	int **graph=new int*[V];
-	for(int i=0;i<V;i++)
-	graph[i]=new int[V];
-	cout<<"\nEnter the adjacency matrix :\n";
-	for(int i=0;i<V;i++)
-	for(int j=0;j<V;j++)
-	cin>>graph[i][j];
-	dijkstra(graph, 0); 
-
-	return 0; 
-} 
-
+/*
+OUTPUT:
+Enter the number of nodes :5
+Enter the cost matrix :
+0 3 1 999 999
+3 0 7 5 1
+1 7 0 2 999
+999 5 2 0 7
+999 1 999 7 0
+Enter souce vertex :0
+Shortest Distance :
+0 - 1 -> 3
+0 - 2 -> 1
+0 - 3 -> 3
+0 - 4 -> 4
+*/
 /* output:
 
 Enter the no. of nodes :9
@@ -86,6 +81,7 @@ Enter the adjacency matrix :
   999 999 999 999 999 2 999 1 6
   8 11 999 999 999 999 1  999 7
   999 999 2 999 999 999 6 7 999
+source vertex: 0 
 Vertex 		 Distance from Source
 0 		 0
 1 		 4
