@@ -1,60 +1,52 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <cmath>
 using namespace std;
-void floyds(vector<vector<int>> &a,int n){
 
-  for(int k=0;k<n;k++){
-    for(int i=0;i<n;i++){
-      for(int j=0;j<n;j++){
-        a[i][j]=min(a[i][j],a[i][k]+a[k][j]);
-      }
-    }
-  }
-
-  cout<<"output\n";
-  for(int i=0;i<n;i++){
-    for(int j=0;j<n;j++){
-      cout<<a[i][j]<<"\t";
-    }
-    cout<<"\n";
-  }
-
-}
-
-
+void floyds(int **D,int n){	
+	for(int k=0;k<n;k++)
+		for(int i=0;i<n;i++)
+			for(int j=0;j<n;j++)
+				D[i][j] = min(D[i][j],D[i][k]+D[k][j]);
+				
+	cout<<"\nAll Pairs Shortest Paths:\n";
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++)
+			cout<<D[i][j]<<"\t";
+		cout<<endl;
+	}//end of loop
+}//end of method
 
 int main(){
-  int n,src;
-  cout<<"enter number of nodes\n";
-  cin>>n;
-  vector<vector<int>> c;
-  cout<<"enter the cost matrix\n";
-  for(int i=0;i<n;i++){
-    vector<int> temp;
-    for(int j=0;j<n;j++){
-      int ele;
-      cin>>ele;
-      temp.push_back(ele);
-    }
-    c.push_back(temp);
-  }
+	int **D, n;
+	cout<<"Enter the number of nodes : ";
+	cin>>n;
+	
+	D = new int*[n];
+	for(int i =0; i<n; i++)
+		D[i] = new int[n];
+	
+	cout<<"Enter cost matrix :\n";	
+	for(int i=0;i<n;i++)
+		for(int j=0;j<n;j++)
+			cin>>D[i][j];
+			
+	floyds(D,n);
+	return 0;
+}//end of main
 
-  floyds(c,n);
-  /*
-  enter the number og nodes:5
-  enter the cost:
+/*
+OUTPUT:
+Enter the number of nodes : 5
+Enter cost matrix :
 0 2 999 1 8
 6 0 3 2 999
 999 999 0 4 999
 999 999 2 0 3
 3 999 999 999 0
-output
-0       2       3       1       4
-6       0       3       2       5
-10      12      0       4       7
-6       8       2       0       3
-3       5       6       4       0
-  */
-
-
-  return 0;
-}
+All Pairs Shortest Paths:
+0	2	3	1	4	
+6	0	3	2	5	
+10	12	0	4	7	
+6	8	2	0	3	
+3	5	6	4	0	
+*/
